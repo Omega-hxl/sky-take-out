@@ -12,10 +12,10 @@ sky:
     access-key-secret: U6k1brOZ8gaOIXv3nXbulGTUzy6Pd7
     bucket-name: sky-take-out
   redis:
-    host: 192.168.8.128
+    host: 127.0.0.1
     port: 6379
     password:
-    database: 10
+    database: 0
   wechat:
     appid: wx9e8dde9d2df9df58
     secret: 7a354c0cab2186281c18839acf453e37

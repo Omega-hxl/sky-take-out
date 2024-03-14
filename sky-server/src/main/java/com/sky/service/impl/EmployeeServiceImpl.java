@@ -83,16 +83,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 设置密码，默认密码123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
+        // 在mapper对应方法上加入自定义的AutoFill注解后，可以省略以下赋值代码
         // 设置当前记录的创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        //employee.setCreateTime(LocalDateTime.now());
+        //employee.setUpdateTime(LocalDateTime.now());
 
         // 通过ThreadLocal获取用户信息
-        Long currentId = BaseContext.getCurrentId();
+        //Long currentId = BaseContext.getCurrentId();
 
         // 设置当前记录创建人id和修改人id
-        employee.setCreateUser(currentId);//目前写个假数据，后期修改
-        employee.setUpdateUser(currentId);
+        //employee.setCreateUser(currentId);//目前写个假数据，后期修改
+        //employee.setUpdateUser(currentId);
 
         employeeMapper.insert(employee);//后续步骤定义
     }
@@ -149,9 +150,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 在mapper对应方法上加入自定义的AutoFill注解后，可以省略以下赋值代码
+        // employee.setUpdateTime(LocalDateTime.now());
+        // employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 

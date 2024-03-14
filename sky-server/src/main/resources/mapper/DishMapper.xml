@@ -32,7 +32,7 @@
 
 <!--    菜品分页查询-->
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
-        select d.*,c.name as categoryName
+        select d.*,c.name as category_name
         from dish d left join category c on d.category_id = c.id
         <where>
             <if test="name!=null">

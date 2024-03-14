@@ -21,6 +21,6 @@ public class JwtProperties {
      */
     private String userSecretKey;
     private long userTtl;
-    private String userTokenName;
+    private String userTokenName;   // 在用户登录后，每次发送请求都需要在请求头中携带此字段，springboot拦截器会拦截请求对该字段进行验证
 
 }

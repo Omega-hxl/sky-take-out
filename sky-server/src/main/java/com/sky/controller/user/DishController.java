@@ -36,25 +36,25 @@ public class DishController {
     @GetMapping("/list")
     @ApiOperation("根据分类id查询菜品")
     public Result<List<DishVO>> list(Long categoryId) {
-//        构造redis中的key，规则：dish_分类Id
+        //        构造redis中的key，规则：dish_分类Id
         String key = "dish_" + categoryId;
 
-//        查询redis中是否存在菜品数据
+        //        查询redis中是否存在菜品数据
         List<DishVO> list = (List<DishVO>) redisTemplate.opsForValue().get(key);
         if (list != null && list.size() > 0) {
-//            如果存在，直接返回，无需查询数据库
+            //            如果存在，直接返回，无需查询数据库
             return Result.success(list);
         }
 
 
-//        如果不存在，查询数据库，将查询到的数据放入redis中
+        //        如果不存在，查询数据库，将查询到的数据放入redis中
         Dish dish = new Dish();
         dish.setCategoryId(categoryId);
         dish.setStatus(StatusConstant.ENABLE);//查询起售中的菜品
 
         list = dishService.listWithFlavor(dish);
 
-//        放入redis
+        //        放入redis
         redisTemplate.opsForValue().set(key, list);
         return Result.success(list);
     }

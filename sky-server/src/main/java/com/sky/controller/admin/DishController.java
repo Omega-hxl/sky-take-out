@@ -44,7 +44,7 @@ public class DishController {
         log.info("新增菜品：{}", dishDTO);
         dishService.saveWithFlavor(dishDTO);
 
-//        清理缓存数据
+        //        清理缓存数据
         String key = "dish_" + dishDTO.getCategoryId();
         clearCache(key);
 
@@ -148,7 +148,8 @@ public class DishController {
      * @param pattern
      */
     private void clearCache(String pattern) {
-        Set keys = redisTemplate.keys(pattern);
+        Set keys = redisTemplate.keys(pattern);  // 实现通配符匹配删除
+
         redisTemplate.delete(keys);
     }
 
